@@ -10,11 +10,11 @@ namespace Mailru.UsersClasses
 {
     internal class SendingEmail
     {
-        private InfoEmailSending InfoEmailSending { get; set; }
+        private InfoEmail InfoEmail { get; set; }
 
-        public SendingEmail(InfoEmailSending infoEmailSending)
+        public SendingEmail(InfoEmail infoEmailSending)
         {
-            InfoEmailSending = infoEmailSending
+            InfoEmail = infoEmailSending
             ?? throw new ArgumentNullException(nameof(infoEmailSending));
         }
 
@@ -24,47 +24,50 @@ namespace Mailru.UsersClasses
             {
 
                 SmtpClient mySmtpClient =
-                    new SmtpClient(InfoEmailSending.SmtpClientAdress);
+                    new SmtpClient(InfoEmail.SmtpClientAdress);
 
 
                 mySmtpClient.UseDefaultCredentials = false;
 
                 mySmtpClient.EnableSsl = true;
 
+                if (InfoEmail.Port != -1)
+                    mySmtpClient.Port = InfoEmail.Port;
+
                NetworkCredential basicAuthenticationInfo = new
                    NetworkCredential(
-                   InfoEmailSending.EmailAdressFrom.EmailAdress, 
-                   InfoEmailSending.EmailPassword);
+                   InfoEmail.EmailAdressFrom.EmailAdress, 
+                   InfoEmail.EmailPassword);
 
                 mySmtpClient.Credentials = basicAuthenticationInfo;
 
 
                 MailAddress from = new MailAddress(
-                InfoEmailSending.EmailAdressFrom.EmailAdress,
-                InfoEmailSending.EmailAdressFrom.Name);
+                InfoEmail.EmailAdressFrom.EmailAdress,
+                InfoEmail.EmailAdressFrom.Name);
 
                 MailAddress to = new MailAddress(
-                InfoEmailSending.EmailAdressTo.EmailAdress,
-                InfoEmailSending.EmailAdressTo.Name);
+                InfoEmail.EmailAdressTo.EmailAdress,
+                InfoEmail.EmailAdressTo.Name);
 
                 MailMessage myMail = new MailMessage(from, to);
 
 
                 MailAddress replyTo =
-                    new MailAddress(InfoEmailSending.EmailAdressFrom.EmailAdress); 
+                    new MailAddress(InfoEmail.EmailAdressFrom.EmailAdress); 
                 myMail.ReplyToList.Add(replyTo);
 
                 Encoding encoding = Encoding.UTF8;
 
-                myMail.Subject = InfoEmailSending.Subject; myMail.SubjectEncoding = encoding;
+                myMail.Subject = InfoEmail.Subject; myMail.SubjectEncoding = encoding;
 
-                myMail.Body = InfoEmailSending.Body; myMail.BodyEncoding = encoding;
+                myMail.Body = InfoEmail.Body; myMail.BodyEncoding = encoding;
 
                 mySmtpClient.Send(myMail);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new Exception(ex.Message);
             }
         }
     }

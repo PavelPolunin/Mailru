@@ -39,6 +39,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxBody = new System.Windows.Forms.TextBox();
             this.buttonSend = new System.Windows.Forms.Button();
+            this.comboBoxService = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxEmail
@@ -129,18 +131,42 @@
             // 
             // buttonSend
             // 
-            this.buttonSend.Location = new System.Drawing.Point(299, 365);
+            this.buttonSend.Location = new System.Drawing.Point(468, 376);
             this.buttonSend.Name = "buttonSend";
             this.buttonSend.Size = new System.Drawing.Size(199, 37);
             this.buttonSend.TabIndex = 10;
             this.buttonSend.Text = "Отправить";
             this.buttonSend.UseVisualStyleBackColor = true;
             // 
+            // comboBoxService
+            // 
+            this.comboBoxService.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxService.FormattingEnabled = true;
+            this.comboBoxService.Items.AddRange(new object[] {
+            "Gmail",
+            "Mail.ru"});
+            this.comboBoxService.Location = new System.Drawing.Point(279, 385);
+            this.comboBoxService.Name = "comboBoxService";
+            this.comboBoxService.Size = new System.Drawing.Size(138, 21);
+            this.comboBoxService.TabIndex = 11;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label7.Location = new System.Drawing.Point(115, 384);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(121, 18);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Выбрать сервис";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.comboBoxService);
             this.Controls.Add(this.buttonSend);
             this.Controls.Add(this.textBoxBody);
             this.Controls.Add(this.label6);
@@ -173,6 +199,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxBody;
         private System.Windows.Forms.Button buttonSend;
+        private System.Windows.Forms.ComboBox comboBoxService;
+        private System.Windows.Forms.Label label7;
     }
 }
 
